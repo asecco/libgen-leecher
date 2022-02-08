@@ -1,21 +1,18 @@
 from libgen_api import LibgenSearch
 import urllib.request
-import os
+import pprint
 
-book = str(input("Book Name: "))
+book = str(input("What is the book title?: "))
 
 s = LibgenSearch()
-results = s.search_title(book)
-print(results)
-
-print("\n\n")
-print("Download links:")
+title_filters = {"Extension": "pdf"}
+results = s.search_title_filtered(book, title_filters, exact_match=True)
+pp = pprint.PrettyPrinter(indent=2)
+pp.pprint(results)
 
 item_to_download = results[0]
 download_links = s.resolve_download_links(item_to_download)
-print(download_links)
-
-url = ""
+url = download_links["Cloudflare"]
 
 def main():
     download_file(url)
