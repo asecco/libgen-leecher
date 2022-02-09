@@ -24,18 +24,23 @@ def search():
     print("\nResults: \n")
     pp.pprint(results)
 
-    item_to_download = results[0]
-    download_links = s.resolve_download_links(item_to_download)
-    global url
-    url = download_links["Cloudflare"]
+    if results:
+        item_to_download = results[0]
+        download_links = s.resolve_download_links(item_to_download)
+        global url
+        url = download_links["Cloudflare"]
+        
+        correct_book = str(input("\nIs this the book you're looking for? [y/n] "))
+        if correct_book == "y":
+            main()
+        elif correct_book == "n":
+            print("\nPlease refine your search\n")
+            search()
+        else:
+            print("\nInvalid input. \nExiting.")
+            quit()
 
-    correct_book = str(input("\nIs this the book you're looking for? [y/n] "))
-    if correct_book == "y":
-        main()
-    elif correct_book == "n":
-        print("\nPlease refine your search\n")
+    if not results:
+        print("\nNo results. Try refining your search\n")
         search()
-    else:
-        print("\nInvalid input. \nExiting.")
-        quit()
 search()
