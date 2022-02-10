@@ -20,9 +20,12 @@ def search():
     s = LibgenSearch()
     title_filters = {"Extension": "pdf"}
     results = s.search_title_filtered(book, title_filters, exact_match=True)
-    pp = pprint.PrettyPrinter(indent=2)
+
+    pp = pprint.PrettyPrinter(indent=2, width=150)
     print("\nResults: \n")
-    pp.pprint(results)
+    results_items = results[0].items()
+    results_filters = list(results_items)[1:8]
+    pp.pprint(results_filters)
 
     if results:
         item_to_download = results[0]
