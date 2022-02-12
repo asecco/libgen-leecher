@@ -2,7 +2,7 @@ from libgen_api import LibgenSearch
 import urllib.request
 import pprint
 
-print("Welcome to LibGen Leecher\n")
+print("\nWelcome to LibGen Leecher\n")
 
 def main():
     download_file(url)
@@ -15,18 +15,24 @@ def download_file(url):
     print("\nDownload complete. Enjoy!")
 
 def search():
-    global book
-    book = str(input("What is the book title? "))
-    s = LibgenSearch()
-    title_filters = {"Extension": "pdf"}
-    results = s.search_title_filtered(book, title_filters, exact_match=True)
+    try:
+        global book
+        book = str(input("What is the book title? "))
+        s = LibgenSearch()
+        title_filters = {"Extension": "pdf"}
+        results = s.search_title_filtered(book, title_filters, exact_match=True)
+        
+        pp = pprint.PrettyPrinter(indent=2, width=150)
+        print("\nResults: \n")
+        results_items = results[0].items()
+        results_filters = list(results_items)[1:8]
+        pp.pprint(results_filters)
 
-    pp = pprint.PrettyPrinter(indent=2, width=150)
-    print("\nResults: \n")
-    results_items = results[0].items()
-    results_filters = list(results_items)[1:8]
-    pp.pprint(results_filters)
-
+    except IndexError:
+        pass
+        print("\nNo results. Try refining your search\n")
+        search()
+    
     if results:
         item_to_download = results[0]
         download_links = s.resolve_download_links(item_to_download)
@@ -42,8 +48,4 @@ def search():
         else:
             print("\nInvalid input. \nExiting.")
             quit()
-
-    if not results:
-        print("\nNo results. Try refining your search\n")
-        search()
 search()
