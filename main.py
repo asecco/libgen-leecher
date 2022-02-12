@@ -8,8 +8,9 @@ def main():
     download_file(url)
 
 def download_file(url):
+    book_download = book.replace(":","")
     response = urllib.request.urlopen(url)
-    file = open(book + ".pdf", 'wb')
+    file = open(book_download + ".pdf", 'wb')
     file.write(response.read())
     file.close()
     print("\nDownload complete. Enjoy!")
