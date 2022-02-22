@@ -30,7 +30,6 @@ def search():
         pp.pprint(results_filters)
 
     except IndexError:
-        pass
         print("\nNo results. Try refining your search\n")
         search()
     
@@ -41,9 +40,9 @@ def search():
         url = download_links["Cloudflare"]
         
         correct_book = str(input("\nIs this the book you're looking for? [y/n] "))
-        if correct_book == "y":
+        if (correct_book.lower() == "y") or (correct_book.lower() == "yes"):
             main()
-        elif correct_book == "n":
+        elif (correct_book.lower() == "n") or (correct_book.lower() == "no"):
             print("\nPlease refine your search\n")
             search()
         else:
