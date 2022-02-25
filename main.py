@@ -19,8 +19,9 @@ def search():
     try:
         global book
         book = str(input("What is the book title? "))
+        book_year = input("What is the year the book released? ")
         s = LibgenSearch()
-        title_filters = {"Extension": "pdf"}
+        title_filters = {"Extension": "pdf", "Year": book_year}
         results = s.search_title_filtered(book, title_filters, exact_match=True)
         
         pp = pprint.PrettyPrinter(indent=2, width=150)
