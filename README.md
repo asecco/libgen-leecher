@@ -6,7 +6,7 @@ A script for easily downloading books from Library Genesis.
 ## Installation
 This script can be installed using pip
 
-`pip install LibGen-Leecher`
+    pip install LibGen-Leecher
 
 ## Usage
 ![Untitled](https://user-images.githubusercontent.com/40510223/155868719-93aed288-7ef5-4a87-870e-d55c80ccd0d4.png)
