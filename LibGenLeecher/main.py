@@ -10,7 +10,13 @@ def main():
 def download_file(url):
     book_download = book.replace(":","")
     response = urllib.request.urlopen(url)
-    file = open(book_download + ".pdf", 'wb')
+    if "pdf" in results_filters[7]:
+        file = open(book_download + ".pdf", 'wb')
+    elif "epub" in results_filters[7]:
+        file = open(book_download + ".epub", 'wb')
+    else:
+        print("\nInvalid file extension. \nExiting.")
+        quit()
     file.write(response.read())
     file.close()
     print("\nDownload complete. Enjoy!")
@@ -19,15 +25,16 @@ def search():
     try:
         global book
         book = str(input("What is the book title? "))
-        book_year = input("What is the year the book released? ")
+        book_year = input("What year did the book release? ")
         s = LibgenSearch()
-        title_filters = {"Extension": "pdf", "Year": book_year}
+        title_filters = {"Year": book_year}
         results = s.search_title_filtered(book, title_filters, exact_match=True)
         
         pp = pprint.PrettyPrinter(indent=2, width=150)
         print("\nResults: \n")
         results_items = results[0].items()
-        results_filters = list(results_items)[1:8]
+        global results_filters
+        results_filters = list(results_items)[1:9]
         pp.pprint(results_filters)
 
     except IndexError:

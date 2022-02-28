@@ -9,7 +9,7 @@ setup(
     author_email = "<asecco99@gmail.com>",
     packages = find_packages(),
     entry_points = {
-        'console_scripts': ['libGen-leecher=LibGenLeecher:search']
+        'console_scripts': ['libGen-leecher=LibGenLeecher:main']
         },
     install_requires = ['libgen-api'],
     keywords = ['python', 'downloader', 'library genesis', 'textbooks'],
